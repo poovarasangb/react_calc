@@ -1,4 +1,5 @@
 const path = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 const REPOSITORY_BASE_DIR = path.resolve("./");
 
@@ -15,5 +16,8 @@ module.exports = ({
             filename: fileName,
             path: path.resolve(__dirname, outputDir),
         },
+        plugins: [
+            new HtmlWebpackPlugin()
+          ]
     }
 }
