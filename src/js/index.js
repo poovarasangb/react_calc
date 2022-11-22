@@ -1,13 +1,15 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom/client';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
-// import { App } from './App';
+import { App } from './App';
 
-// const root = ReactDOM.createRoot(document.getElementById('root'));
-// root.render(
-//   <React.StrictMode>
-//     <App name="PGB"/>
-//   </React.StrictMode>
-// );
-document.title = "React Calculator APP"
-console.log('Hello PGB')
+const mainElement = document.createElement("main");
+document.body.appendChild(mainElement);
+document.title = "React Calculator App";
+
+const root = ReactDOM.createRoot(mainElement);
+root.render(
+  <React.StrictMode>
+    <App name="PGB"/>
+  </React.StrictMode>
+);
