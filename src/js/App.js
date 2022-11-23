@@ -1,9 +1,7 @@
 import React from 'react';
 
-export const App = ({name}) => {
-  return (
+export const App = ({ name }) => (
     <h1>
-      {"Hello " + name}
+      {`Hello ${name}`}
     </h1>
-  )
-}
+);
