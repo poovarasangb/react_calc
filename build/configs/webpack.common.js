@@ -6,6 +6,7 @@ const REPOSITORY_BASE_DIR = path.resolve("./");
 module.exports = ({
     fileName = "main.js", 
     outputDir = path.join(REPOSITORY_BASE_DIR, "output"),
+    devServerPort = 1234
 }) => {
     return {
         mode: "development",
@@ -17,9 +18,18 @@ module.exports = ({
             filename: fileName,
             path: path.resolve(__dirname, outputDir),
         },
+
+        devServer: {
+          static: {
+              directory: outputDir
+          },
+          port: devServerPort,
+          hot: true,
+          liveReload: true,
+        },
         
         plugins: [
-            new HtmlWebpackPlugin()
+          new HtmlWebpackPlugin()
         ],
 
         module: {
