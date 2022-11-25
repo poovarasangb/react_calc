@@ -1,4 +1,8 @@
+@use "./func/rem" as *;
+
 .mainCss {
-    font-size: 10px;
+    h1 {
+        font-size: rem(50px);
+    }
     color: red;
 }

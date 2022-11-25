@@ -1,9 +1,10 @@
 import '../scss/init.scss';
+import 'bootstrap/scss/bootstrap.scss';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import { App } from './App';
+import { App } from './App'; ;
 
 const mainElement = document.createElement('main');
 document.body.appendChild(mainElement);
