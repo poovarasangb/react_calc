@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const REPOSITORY_BASE_DIR = path.resolve('./');
 const SRCPATH = path.join(REPOSITORY_BASE_DIR, '/src/js');
@@ -31,6 +32,8 @@ module.exports = ({
 
   plugins: [
     new HtmlWebpackPlugin(),
+    new MiniCssExtractPlugin({
+    }),
     new ESLintPlugin({
       context: SRCPATH
     })
@@ -47,6 +50,30 @@ module.exports = ({
             presets: ['@babel/env', '@babel/preset-react']
           }
         }
+      },
+      {
+        test: /\.s?css$/,
+        use: [{
+          loader: MiniCssExtractPlugin.loader
+        }, {
+          loader: 'css-loader',
+          options: {
+            esModule: false,
+            url: true,
+            sourceMap: false
+          }
+        }, {
+          loader: 'postcss-loader',
+          options: {
+            sourceMap: false
+          }
+        }, {
+          loader: 'sass-loader',
+          options: {
+            sourceMap: false,
+            implementation: require('sass')
+          }
+        }]
       }
     ]
   }
