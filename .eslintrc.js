@@ -23,6 +23,7 @@ module.exports = {
     'react'
   ],
   rules: {
+    'react/react-in-jsx-scope': 0,
     'arrow-body-style': [2, 'as-needed'],
     'prefer-template': 2,
     'react/prop-types': 0,
@@ -33,6 +34,7 @@ module.exports = {
         after: true
       }
     ],
-    semi: [2, 'always']
+    semi: [2, 'always'],
+    indent: ['error', 2]
   }
 };

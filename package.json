@@ -11,7 +11,7 @@
     "sass": "^1.56.1"
   },
   "scripts": {
-    "clean": "rm -rf node_modules",
+    "clean": "rm -rf node_modules package-lock.json",
     "cleanIns": "rm -rf node_modules && npm i",
     "watch": "webpack serve --config  ./build/configs/webpack.common.js"
   },
