@@ -1,9 +1,7 @@
-import React from 'react';
+import { CalendarButton } from './components/button';
 
-export const App = ({ name }) => (
+export const App = () => (
   <div className='mainCss'>
-    <h1>
-      {`Hello ${name}`}
-    </h1>
+    <CalendarButton name="Poovarasan" />
   </div>
 );

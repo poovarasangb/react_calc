@@ -42,12 +42,13 @@ module.exports = ({
   module: {
     rules: [
       {
-        test: /\.m?js$/,
-        exclude: /(node_modules|bower_components)/,
+        test: /\.(js|jsx|mjs)$/,
         use: {
-          loader: 'babel-loader',
+          loader: 'esbuild-loader',
           options: {
-            presets: ['@babel/env', '@babel/preset-react']
+            loader: 'jsx',
+            target: 'es2015',
+            jsx: 'automatic'
           }
         }
       },
@@ -76,5 +77,9 @@ module.exports = ({
         }]
       }
     ]
+  },
+
+  resolve: {
+    extensions: ['.js', '.jsx']
   }
 });
