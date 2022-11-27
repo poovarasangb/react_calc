@@ -12,8 +12,9 @@
   },
   "scripts": {
     "clean": "rm -rf node_modules package-lock.json",
-    "cleanIns": "rm -rf node_modules && npm i",
-    "watch": "webpack serve --config  ./build/configs/webpack.common.js"
+    "cleanIns": "npm run clean && npm i",
+    "watch": "webpack serve --config  ./build/configs/webpack.common.js",
+    "cleanWatch": "npm run cleanIns && npm run watch"
   },
   "eslintConfig": {
     "extends": [
