@@ -10,8 +10,7 @@ module.exports = {
     }
   },
   extends: [
-    'plugin:react/recommended',
-    'standard-with-typescript'
+    'plugin:react/recommended'
   ],
   overrides: [
   ],
