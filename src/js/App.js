@@ -1,39 +1,31 @@
-import { useCallback } from "react";
-import { CalendarButton } from "./components/button";
+import { lazy, Suspense, useRef, useState } from "react";
+import { CalcContext } from "./context/calcContext";
+
+const Header = lazy(() =>
+    import(/* webpackChunkName: "header" */ "./components/header")
+);
 
 export const App = () => {
-    const renderAppName =  useCallback(() =>(
-        <div className="app-name">
-      Calculator using react
-        </div>
-    ), []);
+    const [calc, setCalc] = useState(() => ({
+        number: 0,
+        sign: "",
+        result: null
+    }));
 
-    const renderHeader = () =>(
-        <header>
-            <nav className="navbar navbar-light bg-light">
-                <a className="navbar-brand" href="#">
-                    <div className="app-nameLogo-section">
-                        <div className="app-logo">
-                            <img
-                                src="https://cdn2.iconfinder.com/data/icons/ios7-inspired-mac-icon-set/512/Calculator_512.png"
-                                width="40" height="40"
-                                className="d-inline-block align-top"
-                                alt="C"/>
-                        </div>
-                        {renderAppName()}
-                    </div>
-                </a>
-            </nav>
-        </header>
-    );
+    const headerRef = useRef();
+
+    const context = {
+        calc,
+        setCalc
+    };
 
     return (
-        <>
-            {renderHeader()}
-            <CalendarButton
-                text={1}
-                value={1}
-            />
-        </>
+        <Suspense fallback={null}>
+            <Header ref={headerRef} />
+            <CalcContext.Provider context={context}>
+                {}
+            </CalcContext.Provider>
+        </Suspense>
     );
+
 };

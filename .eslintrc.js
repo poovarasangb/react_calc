@@ -6,12 +6,8 @@ module.exports = {
         es6: true,
         node: true
     },
-    settings: {
-        react: {
-            version: 'detect'
-        }
-    },
     extends: [
+        "eslint:recommended",
         'plugin:react/recommended'
     ],
     overrides: [
@@ -22,7 +18,8 @@ module.exports = {
     },
     plugins: [
         'react',
-        'react-hooks'
+        'react-hooks',
+        "import"
     ],
     rules: {
         'react/react-in-jsx-scope': 0,
@@ -84,9 +81,40 @@ module.exports = {
             2, {
                 ignoreCase: true
             }
-        ]
+        ],
+        "space-infix-ops": 2,
+        "keyword-spacing": [
+            2,
+            {
+                before: true,
+                after: true
+            }
+        ],
+        "arrow-spacing": [
+            2,
+            {
+                before: true,
+                after: true
+            }
+        ],
+        "no-multi-spaces": 2,
+        "react/jsx-equals-spacing": [
+            2,
+            "never"
+        ],
+        "import/dynamic-import-chunkname": [
+            2,
+            {
+                importFunctions: ["dynamicImport"],
+                webpackChunknameFormat: "[a-zA-Z0-9-./_]+"
+            }
+        ],
+        "react/self-closing-comp": 2
     },
     settings: {
+        react: {
+            version: 'detect'
+        },
         "import/resolver": {
             webpack: {
                 config: path.resolve(__dirname, "./build/configs/webpack.common.js")
