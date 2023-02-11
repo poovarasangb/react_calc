@@ -1,8 +1,8 @@
-import { useCallback } from "react";
+import { forwardRef, useCallback } from "react";
 
-const Header = ({
+const Header = forwardRef(({
     title = "Calculator using react"
-}) => {
+}, ref) => {
     const renderAppName = useCallback(() => (
         <div className="app-name">
             {title}
@@ -10,7 +10,7 @@ const Header = ({
     ), [title]);
 
     const renderHeader = useCallback(() => (
-        <header>
+        <header ref={ref}>
             <nav className="navbar navbar-light bg-light">
                 <a className="navbar-brand" href="#">
                     <div className="app-nameLogo-section">
@@ -26,10 +26,11 @@ const Header = ({
                 </a>
             </nav>
         </header>
-    ), [renderAppName]);
+    ), [ref, renderAppName]);
 
     return renderHeader();
-};
+}
+);
 
 export {
     Header as default

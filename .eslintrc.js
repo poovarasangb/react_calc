@@ -109,7 +109,9 @@ module.exports = {
                 webpackChunknameFormat: "[a-zA-Z0-9-./_]+"
             }
         ],
-        "react/self-closing-comp": 2
+        "react/self-closing-comp": 2,
+        "react/display-name": 0,
+        "no-console": 2
     },
     settings: {
         react: {
