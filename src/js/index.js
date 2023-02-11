@@ -12,7 +12,7 @@ document.title = 'React Calculator App';
 
 const root = ReactDOM.createRoot(mainElement);
 root.render(
-  <React.StrictMode>
-    <App/>
-  </React.StrictMode>
+    <React.StrictMode>
+        <App/>
+    </React.StrictMode>
 );

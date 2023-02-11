@@ -1,8 +1,9 @@
 @use "./func/rem" as *;
 
-.mainCss {
-    h1 {
-        font-size: rem(50px);
+.app-nameLogo-section {
+    display: flex;
+    align-items: center;
+    .app-logo {
+        margin-right: rem(10px);
     }
-    color: red;
 }

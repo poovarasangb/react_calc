@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^5.2.3",
+    "clsx": "^1.2.1",
     "node-sass": "^7.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -11,8 +12,9 @@
     "sass": "^1.56.1"
   },
   "scripts": {
-    "clean": "rm -rf node_modules package-lock.json",
-    "cleanIns": "npm run clean && npm i",
+    "clean": "rm -rf node_modules package-lock.json output",
+    "ins": "npm i --registry https://registry.npmjs.com",
+    "cleanIns": "npm run clean && npm run ins",
     "watch": "webpack serve --config  ./build/configs/webpack.common.js",
     "cleanWatch": "npm run cleanIns && npm run watch"
   },

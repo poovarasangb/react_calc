@@ -1,85 +1,91 @@
 const path = require('path');
+
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
-const REPOSITORY_BASE_DIR = path.resolve('./');
-const SRCPATH = path.join(REPOSITORY_BASE_DIR, '/src/js');
+const isProduction = process.env.NODE_ENV === "production";
+const BASE_DIRECTORY = path.resolve('./');
 
-module.exports = ({
-  fileName = 'main.js',
-  outputDir = path.join(REPOSITORY_BASE_DIR, 'output'),
-  devServerPort = 1234
-}) => ({
-  mode: 'development',
-  entry: {
-    [fileName]: path.join(REPOSITORY_BASE_DIR, 'src/js/index.js')
-  },
+const {
+    outputPath, entryFile, outputDir, srcJsPath
+} = require("../utils.js");
 
-  output: {
-    filename: fileName,
-    path: path.resolve(__dirname, outputDir)
-  },
-
-  devServer: {
-    static: {
-      directory: outputDir
+module.exports = () => ({
+    mode: 'development',
+    entry: {
+        [entryFile]: path.join(BASE_DIRECTORY, './src/js/index.js')
     },
-    port: devServerPort,
-    hot: true,
-    liveReload: true
-  },
 
-  plugins: [
-    new HtmlWebpackPlugin(),
-    new MiniCssExtractPlugin({
-    }),
-    new ESLintPlugin({
-      context: SRCPATH
-    })
-  ],
+    output: {
+        filename: (module) =>
+            ((isProduction && module.chunk.name.indexOf("main") === -1) ?
+                "js/[name].[contenthash].js" : "js/[name].js"),
+        chunkFilename: isProduction ? "js/[name].[contenthash].js" : "js/[name].js",
+        path: outputDir
+    },
 
-  module: {
-    rules: [
-      {
-        test: /\.(js|jsx|mjs)$/,
-        use: {
-          loader: 'esbuild-loader',
-          options: {
-            loader: 'jsx',
-            target: 'es2015',
-            jsx: 'automatic'
-          }
-        }
-      },
-      {
-        test: /\.s?css$/,
-        use: [{
-          loader: MiniCssExtractPlugin.loader
-        }, {
-          loader: 'css-loader',
-          options: {
-            esModule: false,
-            url: true,
-            sourceMap: false
-          }
-        }, {
-          loader: 'postcss-loader',
-          options: {
-            sourceMap: false
-          }
-        }, {
-          loader: 'sass-loader',
-          options: {
-            sourceMap: false,
-            implementation: require('sass')
-          }
-        }]
-      }
-    ]
-  },
+    devServer: {
+        static: {
+            directory: outputPath
+        },
+        devMiddleware: {
+            writeToDisk: true
+        },
+        port: process.env.npm_config_devserverport ?? 1234,
+        hot: true,
+        liveReload: true
+    },
 
-  resolve: {
-    extensions: ['.js', '.jsx']
-  }
+    plugins: [
+        new HtmlWebpackPlugin(),
+        new MiniCssExtractPlugin({}),
+        new ESLintPlugin({
+            context: srcJsPath
+        })
+    ],
+
+    module: {
+        rules: [
+            {
+                test: /\.(js|jsx|mjs)$/,
+                use: {
+                    loader: 'esbuild-loader',
+                    options: {
+                        loader: 'jsx',
+                        target: 'es2015',
+                        jsx: 'automatic'
+                    }
+                }
+            },
+            {
+                test: /\.s?css$/,
+                use: [{
+                    loader: MiniCssExtractPlugin.loader
+                }, {
+                    loader: 'css-loader',
+                    options: {
+                        esModule: false,
+                        url: true,
+                        sourceMap: false
+                    }
+                }, {
+                    loader: 'postcss-loader',
+                    options: {
+                        sourceMap: false
+                    }
+                }, {
+                    loader: 'sass-loader',
+                    options: {
+                        sourceMap: false,
+                        implementation: require('sass')
+                    }
+                }]
+            }
+        ]
+    },
+
+    resolve: {
+        extensions: ['.js', '.jsx']
+    }
 });
